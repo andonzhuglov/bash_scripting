@@ -16,8 +16,6 @@ export FZF_DEFAULT_OPTS="
 --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
 --prompt='∼ ' --pointer='▶' --marker='✓'"
 
-
-
 function print { echo -e "${G}[OK] ${W}${1}${NC}"; }
 function error { echo -e "${R}[ERROR] ${Y}${1}${NC}"; }
 function warning { echo -e "${Y}[WARN] ${W}${1}${NC}"; }
@@ -30,6 +28,7 @@ test -d .git || { error "No git repository in this folder. Exiting!"; exit 1; }
 function addFiles {
     info "Please select files to push to remote:"
     local files=$(git status --porcelain | awk '{print $2}' | $fzfBin --multi --preview 'git diff --color=always {}')
+    test -z "${files}" && { warning "No files selected. Exiting!"; exit 1; }
     for file in $files; do
         git add $file
         print "Added $file"
@@ -39,9 +38,11 @@ function addFiles {
 function pushChanges {
     info "Select branch to push to:"
     local remoteBranch=$(git branch -r | awk '{print $1}' | $fzfBin)
-    read -p "Commit message: " commitMessage
+    test -z "${remoteBranch}" && { warning "No branch selected. Exiting!"; exit 1; }
+    commitMessage=""
+    while [[ $commitMessage = "" ]];do  read -p "Commit message: " commitMessage; done
     git commit -m "$commitMessage"
-    #git push origin $remoteBranch
+    git push origin $remoteBranch
     if [[ "${?}" -eq 0 ]] ; then print "Pushed to $remoteBranch" || error "Failed to push to $remoteBranch"; fi
 }
 
