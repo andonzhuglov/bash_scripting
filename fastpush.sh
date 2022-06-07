@@ -37,7 +37,7 @@ function addFiles {
 
 function pushChanges {
     info "Select branch to push to:"
-    local remoteBranch=$(git branch -r | awk '{print $1}' | $fzfBin)
+    local remoteBranch=$(git branch -r | awk '{print $1}' | cut -d '/' -f 2| $fzfBin)
     test -z "${remoteBranch}" && { warning "No branch selected. Exiting!"; exit 1; }
     print "Pushing to ${remoteBranch}"
     commitMessage=""
