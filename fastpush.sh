@@ -39,8 +39,10 @@ function pushChanges {
     info "Select branch to push to:"
     local remoteBranch=$(git branch -r | awk '{print $1}' | $fzfBin)
     test -z "${remoteBranch}" && { warning "No branch selected. Exiting!"; exit 1; }
+    print "Pushing to ${remoteBranch}"
     commitMessage=""
     while [[ $commitMessage = "" ]];do  read -p "Commit message: " commitMessage; done
+    print "Commit message: ${commitMessage}"
     git commit -m "$commitMessage"
     git push origin $remoteBranch
     if [[ "${?}" -eq 0 ]] ; then print "Pushed to $remoteBranch" || error "Failed to push to $remoteBranch"; fi
