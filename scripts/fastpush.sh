@@ -1,12 +1,10 @@
 #!/bin/bash
 
-echo "Which file/s would you like to push?"
-
-read -p -e files
-
-echo "What is the commit comment?"
-
-read comment
+echo "Files in current directory $pwd are:"
+ls
+read -e -p "Select files for push: " files
+echo "Files selected for push $files"
+read -p "What is the commit comment? " comment
 
 git add $files
 git commit -m "$comment"
