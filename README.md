@@ -1,6 +1,6 @@
 # BASH SCRIPTING
 
-### Hello, here is where I will be uploading my personal bash scripts and performing any sort of test with learning purposes  
+**Content and scripts documentation will be listed below**  
 
 ---
   
