@@ -42,7 +42,7 @@ function pushChanges {
     read -p "Commit message: " commitMessage
     git commit -m "$commitMessage"
     #git push origin $remoteBranch
-    if $? ; then print "Pushed to $remoteBranch" || error "Failed to push to $remoteBranch"; fi
+    if "$?" ; then print "Pushed to $remoteBranch" || error "Failed to push to $remoteBranch"; fi
 }
 
 addFiles
