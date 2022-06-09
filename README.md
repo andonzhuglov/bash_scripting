@@ -14,3 +14,8 @@
 
 + Located within .scripts/logsreader.sh
 + Access logs folder within public_html and runs the following: ´kekw´. A list of IPs and their total impacts is displayed
+
+#### DevOps Helper
+
++ This is under development
++ Soon I will update the list with the features and how it works
